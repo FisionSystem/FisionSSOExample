@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@model FisionSSOExample.Models.FisionSSOModel
+
+<div class="jumbotron">
+    <h2>Fision SSO Example</h2>
+</div>
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <fieldset style="max-width:500px;margin-left:60px;">
+            <legend>Example Fision SSO User Login</legend>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FisionUserName, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.FisionUserName, new { @class = "form-control input-lg" })
+                @Html.ValidationMessageFor(model => model.FisionUserName, string.Empty, new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FisionUserPassword, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.FisionUserPassword, new { @class = "form-control input-lg" })
+                <p class="text-danger">@Html.ValidationMessageFor(model => model.FisionUserPassword)</p>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserToken, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.UserToken, new { @class = "form-control input-lg" })
+                @Html.ValidationMessageFor(model => model.UserToken)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AdminToken, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.AdminToken, new { @class = "form-control input-lg" })
+                @Html.ValidationMessageFor(model => model.AdminToken)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FisionLandingPage, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.FisionLandingPage, new SelectList(Enum.GetValues(typeof(FisionSSOExample.Models.FisionLandingPages)), "Homepage"), new { @class = "form-control input-lg" })
+                @Html.ValidationMessageFor(model => model.FisionLandingPage)
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-primary btn-lg">Login</button>
+        </fieldset>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div>
+            @Model.ErrorMessage
+        </div>
+    }
+</div>
